@@ -8,10 +8,10 @@ Na prática, ela responde esta pergunta?
 
 Exemplo comum:
 
-1 - O usuário informa e-mail e senha.
-2 - O front-end envia esses dados para a API.
-3 - A API valida se os dados estão corretos
-4 - Caso estejam corretos, a API devolve uma forma de identificar esse usuário nas próximas requisições.
+1. O usuário informa e-mail e senha.
+2. O front-end envia esses dados para a API.
+3. A API valida se os dados estão corretos.
+4. Caso estejam corretos, a API devolve uma forma de identificar esse usuário nas próximas requisições.
 
 Autenticação não é a mesma coisa que autorização.
 
@@ -96,8 +96,6 @@ Exemplo de login:
 POST /auth/login
 Content-Type: application/json
 
-Body:
-```JSON
 {
     "email": "usuario@email.com",
     "password": "123456"
@@ -134,7 +132,7 @@ async function buscarPerfil() {
         throw new Error("Erro ao buscar perfil");
     }
 
-    return await response.json();
+    return response.json();
 }
 ```
 
@@ -177,7 +175,7 @@ O payload pode carregar informações como:
 ```json
 {
     "sub": "123",
-    "name': "Nícolas",
+    "name": "Nícolas",
     "role": "admin",
     "exp": 1712345678
 }
@@ -240,7 +238,7 @@ Quando o token expira, a API pode retornar:
 No front-end, uma reação comum é:
 - remover o token salvo;
 - redirecionar o usuário para a tela de login;
-- exibir mensagem de sesão expirada.
+- exibir mensagem de sessão expirada.
 
 ---
 
@@ -291,7 +289,7 @@ Em sistemas mais completos, pode existir:
 - access token;
 - refresh token.
 
-O ``access token`` é usado nas requisições normais e costuma durar pouco tempo (~15 minutos pelo padrão).
+O `access token` é usado nas requisições normais e costuma durar pouco tempo. A duração é uma decisão de segurança do sistema, não um valor fixo do JWT.
 O ``refresh token`` serve para pedir um novo access token sem obrigar o usuário a fazer login toda hora.
 
 Fluxo comum:
@@ -335,7 +333,15 @@ Login identifica o usuário. Permissão define o que ele pode fazer.
 
 ---
 
-# 16 - Boas práticas
+# 13 - Logout
+
+No logout, o front-end deve apagar os dados locais da sessão. Se o sistema usa refresh token ou sessão mantida pelo servidor, também deve chamar o endpoint de logout para invalidá-los.
+
+Apagar apenas o access token da interface não invalida automaticamente um token que ainda seja aceito pelo back-end.
+
+---
+
+# 14 - Boas práticas
 - use HTTPS em produção;
 - não salve senha no front-end;
 - não salve dados sensíveis no JWT;
@@ -350,7 +356,7 @@ Login identifica o usuário. Permissão define o que ele pode fazer.
 
 ---
 
-# 17 - Relação com outros estudos
+# 15 - Relação com outros estudos
 Antes deste conteúdo, vale revisar:
 1 - [Fetch API.md](./1%20-%20Fetch%20API.md);
 2 - [REST API.md](./2%20-%20REST%20API.md);
@@ -369,3 +375,11 @@ Depois deste conteúdo, faz sentido estudar:
 - sessão;
 - credentials;
 - interceptação de requests.
+
+---
+
+# 16 - Conclusão
+
+Autenticação comprova a identidade do usuário; autorização decide o que ele pode fazer. O JWT é uma forma de transportar informações assinadas entre cliente e servidor, mas não substitui HTTPS, validação no back-end ou uma estratégia segura de sessão.
+
+No front-end, as responsabilidades principais são enviar as credenciais, armazenar a sessão conforme o contrato da aplicação, incluir o token quando necessário e tratar corretamente expiração, logout, `401` e `403`.

@@ -210,8 +210,8 @@ Onde encontrar cada conteúdo desse diretório:
 
 ---
 
-# conteúdo da secao 6 do JavaScript  
-(secao-6-http-integracao)
+# Conteúdo da seção 12 do JavaScript
+(secao-12-http-integracao)
 
 ## !. 1 - Fetch API.md
 - O que é Fetch API
@@ -264,34 +264,71 @@ Onde encontrar cada conteúdo desse diretório:
 - Boas práticas
 
 ## !. 4 - Headers HTTP.md
-(a fazer)
+- O que são headers
+- Headers de requisição e resposta
+- Content-Type, Accept e Authorization
+- Leitura de headers com Fetch
+- Erros comuns e boas práticas
 
 ## !. 5 - Autenticação e JWT.md
-(a fazer)
+- Autenticação e autorização
+- Estrutura e fluxo do JWT
+- Bearer token
+- Expiração, refresh token e logout
+- Armazenamento e segurança
 
 ## !. 6 - CORS.md
-(a fazer)
+- Origem e política do navegador
+- Requisições simples e preflight
+- Headers Access-Control-Allow
+- CORS com credenciais
+- Diagnóstico e erros comuns
 
 ## !. 7 - Upload de Arquivos.md
-(a fazer)
+- File e input de arquivo
+- FormData e multipart/form-data
+- Validação, segurança e cancelamento
+- Erros comuns
 
 ## !. 8 - Interceptação de Requests.md
-(a fazer)
+- Cliente HTTP compartilhado
+- Headers e autenticação
+- JSON e tratamento de erros
+- Refresh token e concorrência
+- Interceptors em frameworks
 
 ## !. 9 - Cookies, Sessão e Credentials.md
-(a fazer)
+- Cookies e sessão
+- HttpOnly, Secure e SameSite
+- Credentials na Fetch API
+- CORS com cookies
+- XSS, CSRF e logout
 
 ## !. 10 - Query Params e URLSearchParams.md
-(a fazer)
+- Parâmetros de rota e query params
+- URL e URLSearchParams
+- Parâmetros repetidos e opcionais
+- Leitura e sincronização com a URL
 
 ## !. 11 - Paginação, Filtros e Ordenação.md
-(a fazer)
+- Paginação por página, offset e cursor
+- Filtros e ordenação
+- Debounce e cancelamento
+- Estado da interface
 
 ## !. 12 - Retry, Timeout e Cancelamento.md
-(a fazer)
+- AbortController
+- Timeout
+- Retry e falhas transitórias
+- Idempotência e exponential backoff
+- Composição de signals
 
 ## !. 13 - Performance e Boas Práticas.md
-(a fazer)
+- Requisições paralelas e sequenciais
+- Problema N+1
+- Paginação, payload e cache
+- Estados da interface
+- Organização e checklist
 
 # ordem recomendada de estudo
 
