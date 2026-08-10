@@ -27,6 +27,7 @@ O repositório aborda principalmente:
 
 - JavaScript;
 - React;
+- UI, UX e design de produto;
 - AngularJS;
 - Cordova;
 - DOM, eventos e Web APIs;
@@ -47,6 +48,7 @@ DevLab/
   - aulas/
   - estudos/
     - angularjs/
+    - design-de-produto/
     - javascript/
     - react/
   - exercicios/
@@ -76,6 +78,12 @@ Os estudos abordam temas como two-way data binding, templates, controllers, serv
 ### `Frontend/estudos/react/`
 
 Reúne anotações e estudos iniciais sobre React, incluindo JSX, componentes, props e tipagem de props.
+
+### `Frontend/estudos/design-de-produto/`
+
+Reúne estudos práticos de UI, UX e Product Design. O objetivo não é formar um operador de ferramenta ou reproduzir tendências, mas desenvolver repertório para definir produtos, orientar implementações e avaliar criticamente interfaces.
+
+O estudo parte de problemas reais, exercícios no Figma, análise de referências e aplicações em produtos da YA LABS, como YAHub e YABook. O arquivo `Frontend/estudos/design-de-produto/README.md` explica o mapa flexível da área e seu método de uso.
 
 ### `Frontend/exercicios/javascript/`
 
