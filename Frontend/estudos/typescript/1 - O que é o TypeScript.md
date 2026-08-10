@@ -114,3 +114,130 @@ Isso ajuda principalmente em:
 - alterações e refatorações;
 - objetos vindos de APIs;
 - aplicações React, Angular e Node.js
+
+# 5 - Anotação e inferência de tipos
+
+O TypeScript pode conhecer um tipo de duas formas principais.
+
+### Anotação explícita
+
+Você informa o tipo:
+
+```ts
+const curso: string = "TypeScript";
+```
+
+O trecho `: string` é uma anotação de tipo.
+
+### Inferência 
+
+O TypeScript identifica o tipo pelo valor:
+
+```ts
+const curso = "TypeScript";
+```
+
+Mesmo sem escrever `: string`, o TypeScript entende que `curso` contém uma string.
+
+Portanto, a forma mais simples e prática de informar os tipos seria:
+
+```ts
+const idade = 20;
+const ativo = true;
+const nome = "Nícolas";
+```
+
+Use anotações quando elas tomam o contrato do código mais claro, principalmente em parâmetros, retornos importantes e estruturas que não podem ser inferidas facilmente.
+
+# 6 - Tipos primitivos
+
+Os três tipos primitivos mais usados no início são:
+
+### `string`
+
+Representa textos:
+
+```ts
+let tecnologia: string = "TypeScript";
+```
+### `number`
+
+Representa números inteiros e decimais:
+
+```ts
+let quantidade: number = 10;
+let preco: number = 29.90;
+```
+
+### `boolean`
+
+Representa `true` ou `false`:
+```ts
+
+let cursoFinalizado: boolean = true;
+```
+
+Os nomes dos tipos são escritos com letras minúsculas: `string`, `number`, `boolean`
+
+# 7 - Arrays
+
+Podemos declarar o tipo dos elementos de um array:
+
+```ts
+const tecnologias: string[] = [
+    "JavaScript",
+    "TypeScript",
+    "React"
+];
+```
+
+Esse array aceita somente strings:
+
+```ts
+tecnologias.push("Angular");
+tecnologias.push(10);
+```
+
+A segunda operação gera erro.
+
+Outra sintaxe possível é:
+
+```ts
+const tecnologias: Array<string> = [
+    "JavaScript", 
+    "TypeScript", 
+    "React"
+];
+```
+
+# 8 - Funções tipadas
+
+Nas funções, podemos tipar:
+
+- os parâmetros;
+- o valor retornado.
+
+```ts
+function calcularTotal(
+    preco: number,
+    quantidade: number
+): number {
+    return preco * quantidade;
+}
+
+const total = calcularTotal(25, 3);
+```
+
+Aqui: 
+- `preco`, `quantidade` e retorno da função precisam ser números;
+- `total` será inferido como `number`.
+
+uma função que não retorna um resultado pode usar `void`:
+
+```ts
+function exibirMensagem(mensagem: string): void {
+    console.log(mensagem);
+}
+```
+
+`void` indica que o objetivo da função não é entregar um valor para quem a chamou.
