@@ -253,3 +253,147 @@ function exibirMensagem(mensagem: string): void {
 ```
 
 `void` indica que o objetivo da função não é entregar um valor para quem a chamou.
+
+# 9 - Objetos
+
+Um objeto também pode ter sua estrutura tipada:
+
+```ts
+const usuario: {
+    nome: string;
+    idade: number;
+    ativo: boolean;
+} = {
+    nome: "Nícolas",
+    idade: 20,
+    ativo: true
+};
+```
+
+O TypeScript exige que o objeto respeite essa estrutura.
+
+Entretanto, repetir a estrutura diretamente pode deixar o código difícil de manter.
+Podemos criar tipos reutilizáveis:
+
+```ts
+type Usuario = {
+    nome: string;
+    idade: number;
+    ativo: boolean;
+};
+
+const usuario: Usuario = {
+    nome: "Nícolas",
+    idade: 20,
+    ativo: true
+};
+```
+
+O `type Usuario` funciona como um modelo para a estrutura do objeto.
+
+Também podemos utilizá-lo em funções:
+
+```ts
+function apresentarUsuario(usuario: Usuario): string {
+    return `${usuario.nome} tem ${usuario.idade} anos.`;
+}
+```
+
+# 10 - Propriedades opcionais
+
+Nem todas as propriedades precisam ser obrigatórias.
+
+```ts
+type Usuario = {
+    nome: string;
+    idade: number;
+    telefone?: string;
+};
+```
+
+O `?` informa que `telefone` é opcional.
+
+Os dois objetos abaixo são válidos:
+
+```
+const primeiroUsuario: Usuario = {
+    nome: "Nícolas",
+    idade: 20
+};
+
+const segundoUsuario: Usuario = {
+    nome: "Maria",
+    idade: 25,
+    telefone: "11999999999"
+};
+```
+
+Ao acessar ma propriedade opcional, precisamos considerar que ela pode ser `undefined`:
+
+```ts
+if (segundoUsuario.telefone) {
+    console.log(segundoUsuario.telefone);
+}
+```
+
+# 11 - Union types
+
+Um valor pode aceitar mais de um tipo:
+
+```ts
+let identificador: string | number;
+
+identificador = 10;
+identificador = "usuario-10";
+```
+
+O símbolo `|` significa "ou".
+
+Em uma função:
+
+```ts
+function exibirId(id: string | number): void {
+    console.log(`Identificador: ${id}`);
+}
+```
+
+Antes de realizar operações específicas, podemos verificar o tipo:
+
+```ts
+function formatarId(id: string | number): string {
+    if (typeof id === "string") {
+        return id.toUpperCase();
+    }
+    return id.toString();
+}
+```
+
+Essa verificação é chamada de estreitamento de tipo, ou `type narrowing`. Depois do `typeof`, o TypeScript consegue entender qual tipo está sendo tratado em cada parte.
+
+# 12 - Evite usar `any` sem necessidade
+
+O tipo `any` é o tipo mais genérico do TypeScript. Ele permite que uma variável aceite qualquer tipo de valor.
+
+```ts
+let valor: any = 10;
+
+valor = "texto";
+valor = true;
+valor.metodoInexistente();
+```
+
+Isso aproxima o comportamento do JavaScript sem verificação de tipos.
+
+Se você não sabe ainda qual é o tipo de um valor, `unknown` é mais seguro:
+
+```ts
+function exibirValor(valor: unknown): void {
+    if (typeof valor === "string") {
+        console.log(valor.toUpperCase());
+    }
+}
+```
+
+Com `unknown`, precisamos verificar o tipo antes de utilizar opreações específicas.
+
+> Não use `any` apenas para fazer um erro desaparecer. Primeiro entenda por que o tipo não está correto.

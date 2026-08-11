@@ -1,3 +1,4 @@
 Conteúdos para próximos documentos - 1:
 - como o código ts é transformado em js
 - na prática, como a tipagem estática interfere no programa
+- Array<string> e string[]
