@@ -48,6 +48,18 @@ function somar(numeroA, numeroB) {
 somar(10,"5");
 ```
 
+O resultado será a string `"105"`, porque o operador `+` também realiza concatenação quando um dos valores é uma string.
+
+Com TypeScript, podemos declarar o que a função espera:
+
+```ts
+function somar(numeroA: number, numeroB: number): number {
+    return numeroA + numeroB;
+}
+
+somar(10, "5");
+```
+
 O editor aponta que `"5"` não pode ser enviado para um parâmero do tipo `number`.
 
 O TypeScript existe para encontrar problemas como esse durante o desenvolvimento, antes que o usuário execute a aplicação.
