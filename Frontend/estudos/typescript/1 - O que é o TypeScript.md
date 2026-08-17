@@ -397,3 +397,61 @@ function exibirValor(valor: unknown): void {
 Com `unknown`, precisamos verificar o tipo antes de utilizar opreações específicas.
 
 > Não use `any` apenas para fazer um erro desaparecer. Primeiro entenda por que o tipo não está correto.
+
+# 13 - TypeScript não valida dados externos sozinho 
+
+Considere uma resposta de API:
+
+´´´ts
+type Usuario = {
+    nome: string;
+    idade: number;
+}
+
+const resposta = await fetch("/usuarios/1");
+const usuario: Usuario = await resposta.json();
+´´´
+
+A anotação não garante que a API realmente devolveu um objeto válido. Se a resposta tiver campos ausentes ou tipos incorretos, siso ainda poderá causar problemas durante a execução.
+
+TypeScript verifica seu código. Dados externos continuam precisando de validação quando forem importantes.
+
+# 14 - Exemplo prático completo
+
+```ts
+type Produto = {
+    nome: string;
+    preco: number;
+    quantidade: number;
+    desconto?: number;
+};
+
+function calcularTotal(produto: Produto): number {
+    const valorBruto = produto.preco * produto.quantidade;
+    const desconto = produto.desconto ?? 0;
+
+    return valorBruto - desconto;
+}
+
+const produto: Produto = {
+    nome: "Teclado",
+    preco: 150,
+    quantidade: 2,
+    desconto: 20
+};
+
+const total = calcularTotal(produto);
+
+console.log(`${produto.nome}: R$ ${total}`);
+```
+
+O comportamento é este:
+1 - `Produto` define a estrutura esperada.
+2 - `desconto?` permite que o desconto não seja informado.
+3 - A função aceita somente objetos compatíveis com `Produto`.
+4 - `?? 0` utiliza zero quando `desconto` é `null` ou `undefined`.
+5 - A função garante um retorno do tipo `number`.
+6 - O total calculado é `280`.
+
+Esse exemplo mostra o principal benefício do TypeScript: os dados e as funções passam a ter contratos claros.
+
