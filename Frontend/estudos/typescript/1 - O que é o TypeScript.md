@@ -1,4 +1,6 @@
-# 1 - O que é o TypeScript
+# TypeScript — Introdução
+
+## 1 - O que é o TypeScript
 
 TypeScript é uma linguagem baseada em JavaScript que adiciona principalmente:
 
@@ -27,7 +29,7 @@ idade = "vinte";
 
 A atribuição é inválida porque `"vinte"` é uma `string`, mas a variável aceita apenas `number`.
 
-# 2 - Por que TypeScript existe
+## 2 - Por que TypeScript existe
 
 JavaScript possui tipagem dinâmica. Isso significa que uma variável pode receber valores de tipos diferentes durante a execução:
 
@@ -60,11 +62,11 @@ function somar(numeroA: number, numeroB: number): number {
 somar(10, "5");
 ```
 
-O editor aponta que `"5"` não pode ser enviado para um parâmero do tipo `number`.
+O editor aponta que `"5"` não pode ser enviado para um parâmetro do tipo `number`.
 
 O TypeScript existe para encontrar problemas como esse durante o desenvolvimento, antes que o usuário execute a aplicação.
 
-# 3 - TypeScript não substitui o JavaScript
+## 3 - TypeScript não substitui o JavaScript
 
 Navegadores executam JavaScript, não TypeScript diretamente.
 
@@ -106,7 +108,7 @@ Esse é um ponto essencial:
 
 Por isso, TypeScript não substitui validações de dados recebidos de usuários, APIs ou arquivos.
 
-# 4 - Tipagem estática
+## 4 - Tipagem estática
 
 Quando dizemos que o TypeScript utiliza tipagem estática, queremos dizer que os tipos são analisados antes da execução.
 
@@ -127,7 +129,7 @@ Isso ajuda principalmente em:
 - objetos vindos de APIs;
 - aplicações React, Angular e Node.js
 
-# 5 - Anotação e inferência de tipos
+## 5 - Anotação e inferência de tipos
 
 O TypeScript pode conhecer um tipo de duas formas principais.
 
@@ -159,9 +161,9 @@ const ativo = true;
 const nome = "Nícolas";
 ```
 
-Use anotações quando elas tomam o contrato do código mais claro, principalmente em parâmetros, retornos importantes e estruturas que não podem ser inferidas facilmente.
+Use anotações quando elas tornam o contrato do código mais claro, principalmente em parâmetros, retornos importantes e estruturas que não podem ser inferidas facilmente.
 
-# 6 - Tipos primitivos
+## 6 - Tipos primitivos
 
 Os três tipos primitivos mais usados no início são:
 
@@ -191,7 +193,7 @@ let cursoFinalizado: boolean = true;
 
 Os nomes dos tipos são escritos com letras minúsculas: `string`, `number`, `boolean`
 
-# 7 - Arrays
+## 7 - Arrays
 
 Podemos declarar o tipo dos elementos de um array:
 
@@ -222,7 +224,7 @@ const tecnologias: Array<string> = [
 ];
 ```
 
-# 8 - Funções tipadas
+## 8 - Funções tipadas
 
 Nas funções, podemos tipar:
 
@@ -244,7 +246,7 @@ Aqui:
 - `preco`, `quantidade` e retorno da função precisam ser números;
 - `total` será inferido como `number`.
 
-uma função que não retorna um resultado pode usar `void`:
+Uma função que não retorna um resultado pode usar `void`:
 
 ```ts
 function exibirMensagem(mensagem: string): void {
@@ -254,7 +256,7 @@ function exibirMensagem(mensagem: string): void {
 
 `void` indica que o objetivo da função não é entregar um valor para quem a chamou.
 
-# 9 - Objetos
+## 9 - Objetos
 
 Um objeto também pode ter sua estrutura tipada:
 
@@ -299,7 +301,7 @@ function apresentarUsuario(usuario: Usuario): string {
 }
 ```
 
-# 10 - Propriedades opcionais
+## 10 - Propriedades opcionais
 
 Nem todas as propriedades precisam ser obrigatórias.
 
@@ -328,7 +330,7 @@ const segundoUsuario: Usuario = {
 };
 ```
 
-Ao acessar ma propriedade opcional, precisamos considerar que ela pode ser `undefined`:
+Ao acessar uma propriedade opcional, precisamos considerar que ela pode ser `undefined`, especialmente com a configuração strict habilitada.
 
 ```ts
 if (segundoUsuario.telefone) {
@@ -336,7 +338,7 @@ if (segundoUsuario.telefone) {
 }
 ```
 
-# 11 - Union types
+## 11 - Union types
 
 Um valor pode aceitar mais de um tipo:
 
@@ -370,9 +372,9 @@ function formatarId(id: string | number): string {
 
 Essa verificação é chamada de estreitamento de tipo, ou `type narrowing`. Depois do `typeof`, o TypeScript consegue entender qual tipo está sendo tratado em cada parte.
 
-# 12 - Evite usar `any` sem necessidade
+## 12 - Evite usar `any` sem necessidade
 
-O tipo `any` é o tipo mais genérico do TypeScript. Ele permite que uma variável aceite qualquer tipo de valor.
+O tipo any permite que uma variável receba qualquer tipo de valor e desativa grande parte da verificação do TypeScript.
 
 ```ts
 let valor: any = 10;
@@ -394,29 +396,33 @@ function exibirValor(valor: unknown): void {
 }
 ```
 
-Com `unknown`, precisamos verificar o tipo antes de utilizar opreações específicas.
+Com `unknown`, precisamos verificar o tipo antes de utilizar operações específicas.
 
 > Não use `any` apenas para fazer um erro desaparecer. Primeiro entenda por que o tipo não está correto.
 
-# 13 - TypeScript não valida dados externos sozinho 
+## 13 - TypeScript não valida dados externos sozinho 
 
 Considere uma resposta de API:
 
-´´´ts
+```ts
 type Usuario = {
     nome: string;
     idade: number;
+};
+
+async function buscarUsuario(): Promise<void> {
+    const resposta = await fetch("/usuarios/1");
+    const usuario: Usuario = await resposta.json();
+
+    console.log(usuario.nome);
 }
+```
 
-const resposta = await fetch("/usuarios/1");
-const usuario: Usuario = await resposta.json();
-´´´
-
-A anotação não garante que a API realmente devolveu um objeto válido. Se a resposta tiver campos ausentes ou tipos incorretos, siso ainda poderá causar problemas durante a execução.
+A anotação não garante que a API realmente devolveu um objeto válido. Se a resposta tiver campos ausentes ou tipos incorretos, isso ainda poderá causar problemas durante a execução.
 
 TypeScript verifica seu código. Dados externos continuam precisando de validação quando forem importantes.
 
-# 14 - Exemplo prático completo
+## 14 - Exemplo prático completo
 
 ```ts
 type Produto = {
@@ -446,12 +452,12 @@ console.log(`${produto.nome}: R$ ${total}`);
 ```
 
 O comportamento é este:
-1 - `Produto` define a estrutura esperada.
-2 - `desconto?` permite que o desconto não seja informado.
-3 - A função aceita somente objetos compatíveis com `Produto`.
-4 - `?? 0` utiliza zero quando `desconto` é `null` ou `undefined`.
-5 - A função garante um retorno do tipo `number`.
-6 - O total calculado é `280`.
+1. `Produto` define a estrutura esperada.
+2. `desconto?` permite que o desconto não seja informado.
+3. A função aceita somente objetos compatíveis com `Produto`.
+4. `?? 0` utiliza zero quando `desconto` é `null` ou `undefined`.
+5. A função garante um retorno do tipo `number`.
+6. O total calculado é `280`.
 
 Esse exemplo mostra o principal benefício do TypeScript: os dados e as funções passam a ter contratos claros.
 
